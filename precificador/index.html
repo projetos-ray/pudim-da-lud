@@ -370,6 +370,10 @@
     if(!Array.isArray(state.packaging.sizes))state.packaging.sizes=clone(defaults.packaging.sizes);
     if(!saved?.packaging?.sizes){const m=state.packaging.sizes.find(x=>number(x.size)===40);if(m){m.cost=number(state.packaging.jarPackQty)>0?number(state.packaging.jarPackCost)/number(state.packaging.jarPackQty):3;m.labor=number(state.packaging.laborPerUnit);}}
     if(!saved?.order||!Object.prototype.hasOwnProperty.call(saved.order,'packagingUnitCost'))setSizeCosts();
+    else {
+      state.order.packagingUnitCost=knownCost(saved.order.packagingUnitCost)?number(saved.order.packagingUnitCost):null;
+      state.order.laborUnit=knownCost(saved.order.laborUnit)?number(saved.order.laborUnit):null;
+    }
     if(state.order.pricingMode==='table')state.order.pricingMode='recommended';
   }
   migrate(previous);
@@ -440,13 +444,13 @@
     if(!c.packagingKnown)errors.push('Informe o custo da embalagem para este tamanho.');
     if(!c.laborKnown)errors.push('Informe o custo da mão de obra para este tamanho.');
     if(mode==='recommended'&&c.validVolume&&c.packagingKnown&&c.laborKnown&&c.recommended===null)errors.push('Margem mais taxa devem somar menos de 100%.');
-    $('#yieldNotice').innerHTML=errors.length?'⚠️ '+errors.map(esc).join('<br>'):`ⓘ Receita: <strong>${esc(state.production.recipeName||'Receita editável')}</strong>. Para ${dec(c.requestedVolume)} ml de pudim, serão <strong>${c.batches} receita(s)</strong>. Sobra estimada: ${dec(c.leftoverMl)} ml.`;
+    $('#yieldNotice').innerHTML=errors.length?'⚠️ '+errors.map(esc).join('<br>'):`ⓘ Receita: <strong>${esc(state.production.recipeName||'Receita editável')}</strong>. Para ${dec(c.requestedVolume)} ml de pudim, serão <strong>${c.batches} ${c.batches===1?'receita':'receitas'}</strong>. Sobra estimada: ${dec(c.leftoverMl)} ml.`;
     $('#summaryCard').innerHTML=`
       <div class="heading"><div><h2>Resumo financeiro</h2><p>Confira o lucro antes de fechar.</p></div><span class="chip">Ao vivo</span></div>
       <div class="result-note">VALOR TOTAL DO ORÇAMENTO</div>
       <div class="main-price">${valid?money(c.gross):'—'}</div>
-      <div class="subprice">${c.qty} pudins de ${dec(c.fill)} ml × ${money(c.unitPrice)} cada</div>
-      <div class="summary-row"><span>Ingredientes (${c.batches} receitas)</span><strong>${money(c.ingredientTotal)}</strong></div>
+      <div class="subprice">${c.qty} ${c.qty===1?'pudim':'pudins'} de ${dec(c.fill)} ml × ${money(c.unitPrice)} cada</div>
+      <div class="summary-row"><span>Ingredientes (${c.batches} ${c.batches===1?'receita':'receitas'})</span><strong>${money(c.ingredientTotal)}</strong></div>
       <div class="summary-row"><span>Embalagem + decoração</span><strong>${valid?money(c.materialsTotal):'—'}</strong></div>
       <div class="summary-row"><span>Mão de obra + energia</span><strong>${valid?money(c.laborTotal):'—'}</strong></div>
       ${c.fixedTotal?`<div class="summary-row"><span>Custo fixo</span><strong>${money(c.fixedTotal)}</strong></div>`:''}
@@ -576,7 +580,13 @@
     const delExt=e.target.closest('[data-remove-extra]');if(delExt){state.packaging.extras.splice(Number(delExt.dataset.removeExtra),1);persist();renderExtras();renderComputed();return;}
     const hist=e.target.closest('[data-history]');if(hist){
       const item=state.history.find(x=>x.id===hist.dataset.id);if(!item)return;
-      if(hist.dataset.history==='reload'){state.order=merge(clone(defaults.order),item.order);persist();fillInputs();go('budget');toast('Pedido reaberto e recalculado com custos atuais.');}
+      if(hist.dataset.history==='reload'){
+        state.order=merge(clone(defaults.order),item.order);
+        if(!Object.prototype.hasOwnProperty.call(item.order,'packagingUnitCost'))setSizeCosts();
+        else {state.order.packagingUnitCost=knownCost(item.order.packagingUnitCost)?number(item.order.packagingUnitCost):null;state.order.laborUnit=knownCost(item.order.laborUnit)?number(item.order.laborUnit):null;}
+        if(state.order.pricingMode==='table')state.order.pricingMode='recommended';
+        persist();fillInputs();go('budget');toast('Pedido reaberto e recalculado com custos atuais.');
+      }
       else if(hist.dataset.history==='print')printQuote(item.result,item.order);
       else if(hist.dataset.history==='delete'){if(confirm('Excluir este orçamento do histórico? Esta ação não pode ser desfeita.')){state.history=state.history.filter(x=>x.id!==item.id);persist();renderHistory();toast('Orçamento excluído.');}}
       return;
