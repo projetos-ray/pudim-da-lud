@@ -153,6 +153,7 @@
     @media(max-width:920px){.layout{grid-template-columns:1fr}.sidebar{position:sticky;top:0;height:auto;display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:10px;padding:11px 19px;border-right:0;border-bottom:1px solid #eee5dd}.brand-mark{width:36px;height:36px;border-radius:12px;font-size:23px}.brand{padding:0}.brand-name{font-size:17px}.brand-sub{font-size:9px}.sidebar nav{display:flex;gap:4px}.sidebar .nav{display:flex;gap:3px}.nav-btn{padding:10px}.nav-btn span{display:none}.sidebar-section,.sidebar-bottom{display:none}.grid-budget{grid-template-columns:1fr 1fr}.hero-photo{width:240px}}
     @media(max-width:720px){main{padding:17px 14px 40px}.topbar{margin-bottom:15px}.topbar-right{gap:6px}.saved{display:none}.topbar .btn{font-size:11px;padding:8px 10px;min-height:33px}.hero{padding:26px 24px;min-height:205px;border-radius:18px}.hero h1{font-size:31px;max-width:280px}.hero p:not(.eyebrow){max-width:270px}.hero-photo{width:170px;right:-23px;opacity:.52}.grid-budget,.settings-grid{grid-template-columns:1fr}.summary{position:static}.surface{padding:19px}.metrics-grid{grid-template-columns:repeat(3,1fr)}.metric{padding:13px 10px}.metric strong{font-size:21px}.metric-label,.metric small{font-size:10px}.history-card{align-items:flex-start}.history-right{max-width:55%}}
     @media(max-width:430px){.brand-name{font-size:15px}.brand-sub{font-size:8px}.brand-mark{width:33px;height:33px;font-size:22px}.sidebar{padding:10px}.nav-btn{padding:9px}.nav-btn svg{width:18px;height:18px}.topbar-title{font-size:11px}.hero-photo{width:156px}.hero h1{font-size:27px;max-width:250px}.hero{padding:22px 20px}.fields{gap:12px}.field label{font-size:11px}.actions .btn{flex:1 1 42%}.history-card{flex-direction:column}.history-right{max-width:none;width:100%;text-align:left}.history-buttons{justify-content:flex-start}.dynamic-row{grid-template-columns:minmax(0,1.2fr) minmax(0,.6fr) minmax(0,.6fr) 32px;gap:5px}.dynamic-row input{padding:6px!important;font-size:11px}.list-head{grid-template-columns:minmax(0,1.2fr) minmax(0,.6fr) minmax(0,.6fr) 32px}.extras-head,.extra-row{grid-template-columns:22px minmax(0,1fr) minmax(0,.65fr) 32px}.icon-btn{width:32px;height:32px}}
+    .size-shortcuts{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}.size-shortcuts button{border:1px solid #e7d8c7;background:#fffaf5;color:#855537;border-radius:17px;padding:7px 11px;font-weight:700;font-size:12px}.size-shortcuts button.active{background:#7d4d37;color:#fff}.profile-row,.profile-head{grid-template-columns:1fr 1fr 1fr 36px}.toggle-extras{display:flex;align-items:center;gap:8px}.help-text{font-size:11px;color:#998778;line-height:1.65;margin:10px 0}@media(max-width:430px){.profile-row,.profile-head{grid-template-columns:1fr 1fr 1fr 32px}}
     @media print{
       @page{size:A4;margin:14mm}
       body{background:white!important;color:#2d2521!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -187,7 +188,7 @@
     </nav>
     <div class="sidebar-bottom">
       <div class="mini"><strong>Feito para o seu negócio.</strong><br>Calcule seus custos, valorize cada detalhe e venda com segurança.</div>
-      <div class="sidebar-footer">@pudim_dalud · Versão 1.0</div>
+      <div class="sidebar-footer">@pudim_dalud · Versão 2.0</div>
     </div>
   </aside>
 
@@ -196,7 +197,7 @@
 
     <section id="view-budget" class="panel-view active" aria-label="Orçamento">
       <div class="hero">
-        <div class="hero-copy"><p class="eyebrow">PUDIM DA LUD · LEMBRANCINHAS</p><h1>Seu carinho merece<br>um preço justo.</h1><p>Do leite condensado às florzinhas: transforme todos os detalhes em um orçamento que valoriza seu trabalho.</p><button class="btn btn-gold btn-sm" data-goto="costs">✦ &nbsp;Personalizar meus custos</button></div>
+        <div class="hero-copy"><p class="eyebrow">PUDIM DA LUD · PRECIFICADOR</p><h1>Qualquer tamanho.<br>Um preço justo.</h1><p>Escolha qualquer capacidade em ml, ajuste embalagem e mão de obra e calcule o preço ideal. A receita já preenchida é apenas um exemplo.</p><button class="btn btn-gold btn-sm" data-goto="costs">✦ &nbsp;Personalizar meus custos</button></div>
         <div class="hero-overlay"></div><img class="hero-photo" id="heroPhoto" alt="Referência de lembrancinha com potinho de vidro, laço de juta e flores secas">
       </div>
 
@@ -211,17 +212,26 @@
               <div class="field wide"><label for="eventDate">Data do evento <span class="hint">(opcional)</span></label><input id="eventDate" type="date" data-field="order.date"></div>
             </div>
             <div class="divider"></div>
-            <div class="section-caption"><span class="section-num">2</span>Quantidade e tamanho</div>
+            <div class="section-caption"><span class="section-num">2</span>Produto, quantidade e tamanho</div>
             <div class="fields">
-              <div class="field"><label for="quantity">Quantidade de potinhos</label><input id="quantity" type="number" min="1" step="1" data-field="order.quantity"></div>
-              <div class="field"><label for="fillMl">Pudim por potinho (ml)</label><input id="fillMl" type="number" min="1" step="1" data-field="order.fillMl"></div>
+              <div class="field wide"><label for="flavor">Sabor / produto</label><input id="flavor" data-field="order.flavor" placeholder="Tradicional, panetone, chocotone, Ninho..."></div>
+              <div class="field"><label for="quantity">Quantidade de pudins</label><input id="quantity" type="number" min="1" step="1" data-field="order.quantity"></div>
+              <div class="field"><label for="fillMl">Tamanho de cada pudim (ml)</label><input id="fillMl" type="number" min="1" step="1" data-field="order.fillMl"></div>
             </div>
+            <div class="size-shortcuts"><button type="button" data-size="40">40 ml</button><button type="button" data-size="80">80 ml</button><button type="button" data-size="150">150 ml</button><button type="button" data-size="250">250 ml</button><button type="button" data-size="500">500 ml</button><button type="button" data-size="1100">1.100 ml</button></div>
+            <div class="fields">
+              <div class="field"><label for="packagingUnitCost">Embalagem por pudim (R$)</label><input id="packagingUnitCost" data-field="order.packagingUnitCost" type="number" min="0" step="0.01" placeholder="A informar"></div>
+              <div class="field"><label for="laborUnit">Mão de obra + energia (R$ por pudim)</label><input id="laborUnit" data-field="order.laborUnit" type="number" min="0" step="0.01" placeholder="A informar"></div>
+              <div class="field wide"><label class="toggle-extras"><input type="checkbox" data-field="order.includeExtras"> Incluir decoração e acessórios</label></div>
+            </div>
+            <p class="help-text">Digite qualquer tamanho em ml. Os custos são independentes para cada capacidade: informe-os aqui ou cadastre-os em “Custos &amp; receita”.</p>
+            <div class="actions"><button class="btn btn-soft btn-sm" id="applySizeProfile" type="button">Usar custos cadastrados</button></div>
             <div id="yieldNotice" class="inline-alert"></div>
             <div class="divider"></div>
             <div class="section-caption"><span class="section-num">3</span>Valor de venda</div>
             <div class="fields">
-              <div class="field"><label for="priceMode">Como definir o valor?</label><select id="priceMode" data-field="order.pricingMode"><option value="table">Tabela por quantidade</option><option value="recommended">Margem de lucro desejada</option><option value="manual">Definir manualmente</option></select></div>
-              <div class="field" id="manualPriceField" hidden><label for="manualPrice">Valor por potinho (R$)</label><input id="manualPrice" type="number" min="0" step="0.01" data-field="order.manualUnitPrice"></div>
+              <div class="field"><label for="priceMode">Como definir o valor?</label><select id="priceMode" data-field="order.pricingMode"><option value="recommended">Margem de lucro desejada</option><option value="manual">Definir manualmente</option></select></div>
+              <div class="field" id="manualPriceField" hidden><label for="manualPrice">Valor por pudim (R$)</label><input id="manualPrice" type="number" min="0" step="0.01" data-field="order.manualUnitPrice"></div>
               <div class="field" id="effectivePriceField"><label>Preço unitário aplicado</label><div id="effectivePrice" style="min-height:43px;border:1px solid #e7e0d8;background:#faf2e9;border-radius:10px;padding:10px 12px;color:#86553b;font-weight:800"></div></div>
             </div>
             <div class="divider"></div>
@@ -250,10 +260,11 @@
       <div class="settings-grid">
         <div class="stack">
           <div class="surface">
-            <div class="heading"><div><h2>Ingredientes por receita</h2><p>Informe o valor gasto de cada item em <strong>uma receita inteira</strong>, não o preço da embalagem fechada.</p></div><span class="chip">Receita base</span></div>
+            <div class="heading"><div><h2>Ingredientes da receita</h2><p>Os itens abaixo são somente um <strong>exemplo editável</strong>. Troque ingredientes, quantidades e custos para qualquer receita ou sabor.</p></div><span class="chip">Exemplo</span></div>
+            <div class="field" style="margin-bottom:14px"><label for="recipeName">Nome da receita</label><input id="recipeName" data-field="production.recipeName" placeholder="Ex.: tradicional, panetone..."></div>
             <div class="list-head"><span>Ingrediente</span><span>Quantidade usada</span><span>Custo (R$)</span><span></span></div>
             <div id="ingredientsList" class="dynamic-list"></div>
-            <div class="actions"><button id="addIngredient" class="btn btn-soft btn-sm" type="button">+ Adicionar ingrediente</button></div>
+            <div class="actions"><button id="addIngredient" class="btn btn-soft btn-sm" type="button">+ Adicionar ingrediente</button><button id="resetExample" class="btn btn-secondary btn-sm" type="button">Restaurar exemplo</button><button id="clearRecipe" class="btn btn-secondary btn-sm" type="button">Limpar receita</button></div>
             <div class="divider"></div>
             <div class="inline-stat"><span>Custo de uma receita completa</span><strong id="batchCostDisplay">R$ 0,00</strong></div>
           </div>
@@ -264,39 +275,32 @@
               <div class="field"><label for="lossPercent">Perdas / desperdício (%)</label><input id="lossPercent" type="number" min="0" max="99" step="0.1" data-field="production.lossPercent"></div>
             </div>
             <div class="inline-alert"><span>ⓘ</span><span><strong>Atenção:</strong> 1.200 ml está preenchido como hipótese inicial. Se esse número for apenas a capacidade da sua forma, meça o pudim pronto antes de fechar um pedido grande.</span></div>
-            <div class="inline-stat" style="margin-top:15px"><span>Potinhos de 40 ml com uma receita</span><strong id="oneBatchYield">30</strong></div>
+            <div class="inline-stat" style="margin-top:15px"><span>Pudins do tamanho escolhido por receita</span><strong id="oneBatchYield">30</strong></div>
           </div>
         </div>
 
         <div class="stack">
           <div class="surface">
-            <div class="heading"><div><h2>Vidros e decoração</h2><p>O custo do vidro é dividido automaticamente pelo pacote.</p></div></div>
-            <div class="fields">
-              <div class="field"><label for="jarPackQty">Vidros no pacote</label><input id="jarPackQty" type="number" min="1" step="1" data-field="packaging.jarPackQty"></div>
-              <div class="field"><label for="jarPackCost">Preço do pacote (R$)</label><input id="jarPackCost" type="number" min="0" step="0.01" data-field="packaging.jarPackCost"></div>
-            </div>
-            <div class="inline-stat" style="margin-top:14px;margin-bottom:23px"><span>Custo de cada vidro com tampa</span><strong id="jarCostDisplay">R$ 0,00</strong></div>
-            <div class="list-head extras-head"><span>Usar?</span><span>Decoração / acessório</span><span>Custo por pote</span><span></span></div>
+            <div class="heading"><div><h2>Embalagens por tamanho</h2><p>Cadastre o custo da embalagem e da mão de obra por unidade. Os campos vazios serão solicitados ao orçar. Adicione tamanhos personalizados quando quiser.</p></div></div>
+            <div class="list-head profile-head"><span>Tamanho (ml)</span><span>Embalagem (R$)</span><span>Trabalho (R$)</span><span></span></div>
+            <div id="sizesList" class="dynamic-list"></div>
+            <div class="actions"><button id="addSize" class="btn btn-soft btn-sm" type="button">+ Adicionar tamanho</button></div>
+            <p class="help-text">Exemplo: 40 vidros por R$ 120 custam R$ 3,00 por unidade. Valores dos outros tamanhos não foram presumidos.</p>
+            <div class="divider"></div>
+            <div class="list-head extras-head"><span>Usar?</span><span>Decoração / acessório</span><span>Custo por unidade</span><span></span></div>
             <div id="extrasList" class="dynamic-list"></div>
             <div class="actions"><button id="addExtra" class="btn btn-soft btn-sm" type="button">+ Adicionar acessório</button></div>
           </div>
           <div class="surface">
-            <div class="heading"><div><h2>Trabalho e margem</h2><p>Inclua sua mão de obra e as taxas para não vender abaixo do custo.</p></div></div>
+            <div class="heading"><div><h2>Margem e taxas</h2><p>Informe sua margem e taxas. A mão de obra depende de cada tamanho e pode ser preenchida no orçamento.</p></div></div>
             <div class="fields">
-              <div class="field"><label for="laborPerUnit">Mão de obra + energia por pote (R$)</label><input id="laborPerUnit" type="number" min="0" step="0.01" data-field="packaging.laborPerUnit"></div>
               <div class="field"><label for="setupCost">Custo fixo por encomenda (R$)</label><input id="setupCost" type="number" min="0" step="0.01" data-field="packaging.setupCost"></div>
               <div class="field"><label for="targetMargin">Margem desejada (%)</label><input id="targetMargin" type="number" min="0" max="95" step="1" data-field="pricing.targetMargin"></div>
               <div class="field"><label for="paymentFee">Taxa de cartão / venda (%)</label><input id="paymentFee" type="number" min="0" max="99" step="0.1" data-field="pricing.paymentFee"></div>
             </div>
-            <div class="divider"></div>
-            <div class="heading"><div><h2>Minha tabela de preços</h2><p>Aplicada quando você escolhe “Tabela por quantidade”.</p></div></div>
-            <div class="fields">
-              <div class="field"><label for="tier0">1 a 19 unidades (R$)</label><input id="tier0" type="number" min="0" step="0.01" data-field="pricing.tiers.0.price"></div>
-              <div class="field"><label for="tier1">20 a 39 unidades (R$)</label><input id="tier1" type="number" min="0" step="0.01" data-field="pricing.tiers.1.price"></div>
-              <div class="field wide"><label for="tier2">40 unidades ou mais (R$)</label><input id="tier2" type="number" min="0" step="0.01" data-field="pricing.tiers.2.price"></div>
-            </div>
+            <div class="inline-alert"><span>ⓘ</span><span>O preço é sugerido pelos custos e margem de cada pedido; se preferir, defina um valor de venda manualmente.</span></div>
           </div>
-          <p class="settings-footnote">✦ Os valores iniciais são estimativas que você pode editar. Todas as alterações são salvas automaticamente <strong>neste navegador</strong>. Faça um backup em “Exportar dados” para não perder seus registros.</p>
+          <p class="settings-footnote">✦ A receita e os custos iniciais são exemplos editáveis. Todas as alterações são salvas automaticamente <strong>neste navegador</strong>. Faça um backup em “Exportar dados” para não perder seus registros.</p>
         </div>
       </div>
     </section>
@@ -324,15 +328,15 @@
       {name:'Leite em pó',amount:'10 colheres (~100 g)',cost:5.60},
       {name:'Açúcar para calda',amount:'~100 g',cost:0.65}
     ],
-    production:{yieldMl:1200,lossPercent:0},
-    packaging:{jarPackQty:40,jarPackCost:120,laborPerUnit:1.20,setupCost:0,extras:[
+    production:{recipeName:'Tradicional (exemplo)',yieldMl:1200,lossPercent:0},
+    packaging:{jarPackQty:40,jarPackCost:120,laborPerUnit:1.20,setupCost:0,sizes:[{size:40,cost:3,labor:1.2},{size:80,cost:null,labor:null},{size:150,cost:null,labor:null},{size:250,cost:null,labor:null},{size:500,cost:null,labor:null},{size:1100,cost:null,labor:null}],extras:[
       {name:'Cordão de juta',cost:.25,enabled:true},
       {name:'Florzinhas secas',cost:.65,enabled:true},
       {name:'Mini colherzinha',cost:.30,enabled:true},
       {name:'Etiqueta personalizada',cost:.20,enabled:true}
     ]},
     pricing:{targetMargin:50,paymentFee:0,tiers:[{price:15},{price:14},{price:13}]},
-    order:{customer:'',occasion:'',date:'',quantity:30,fillMl:40,pricingMode:'table',manualUnitPrice:13,deliveryCharged:0,deliveryCost:0,discount:0,notes:''},
+    order:{customer:'',occasion:'',date:'',flavor:'Tradicional',quantity:30,fillMl:40,packagingUnitCost:3,laborUnit:1.2,includeExtras:true,pricingMode:'recommended',manualUnitPrice:13,deliveryCharged:0,deliveryCost:0,discount:0,notes:''},
     history:[]
   };
   const clone=o=>JSON.parse(JSON.stringify(o));
@@ -350,11 +354,25 @@
     }
     return typeof provided===typeof base?provided:base;
   };
-  let state;
-  try{state=merge(clone(defaults),JSON.parse(localStorage.getItem(KEY)||'null'));}catch(e){state=clone(defaults);}
-  if(!Array.isArray(state.history))state.history=[];
-  if(!Array.isArray(state.ingredients))state.ingredients=clone(defaults.ingredients);
-  if(!Array.isArray(state.packaging.extras))state.packaging.extras=clone(defaults.packaging.extras);
+  let state,previous;
+  try{previous=JSON.parse(localStorage.getItem(KEY)||'null');state=merge(clone(defaults),previous);}catch(e){state=clone(defaults);previous=null;}
+  const knownCost=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v));
+  function setSizeCosts(){
+    const volume=number(state.order.fillMl),profile=state.packaging.sizes.find(x=>number(x.size)===volume);
+    state.order.packagingUnitCost=profile&&knownCost(profile.cost)?number(profile.cost):null;
+    state.order.laborUnit=profile&&knownCost(profile.labor)?number(profile.labor):null;
+    state.order.includeExtras=volume===40;
+  }
+  function migrate(saved){
+    if(!Array.isArray(state.history))state.history=[];
+    if(!Array.isArray(state.ingredients))state.ingredients=clone(defaults.ingredients);
+    if(!Array.isArray(state.packaging.extras))state.packaging.extras=clone(defaults.packaging.extras);
+    if(!Array.isArray(state.packaging.sizes))state.packaging.sizes=clone(defaults.packaging.sizes);
+    if(!saved?.packaging?.sizes){const m=state.packaging.sizes.find(x=>number(x.size)===40);if(m){m.cost=number(state.packaging.jarPackQty)>0?number(state.packaging.jarPackCost)/number(state.packaging.jarPackQty):3;m.labor=number(state.packaging.laborPerUnit);}}
+    if(!saved?.order||!Object.prototype.hasOwnProperty.call(saved.order,'packagingUnitCost'))setSizeCosts();
+    if(state.order.pricingMode==='table')state.order.pricingMode='recommended';
+  }
+  migrate(previous);
   let storageFailed=false;
   const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){if(!storageFailed){storageFailed=true;toast('O navegador bloqueou o salvamento. Exporte um backup.');}}};
   const fieldGet=path=>path.split('.').reduce((obj,key)=>obj?.[key],state);
@@ -372,52 +390,37 @@
   function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3300);}
   function calculate(){
     const o=state.order,p=state.production,g=state.packaging,pr=state.pricing;
-    const qty=Math.max(1,Math.floor(number(o.quantity)||1));
-    const fill=number(o.fillMl);
-    const batchCost=state.ingredients.reduce((s,i)=>s+number(i.cost),0);
+    const qty=Math.max(1,Math.floor(number(o.quantity)||1)),fill=number(o.fillMl);
+    const batchCost=state.ingredients.reduce((sum,item)=>sum+number(item.cost),0);
     const usableVolume=number(p.yieldMl)*(1-Math.min(99.9,number(p.lossPercent))/100);
-    const yieldPerBatch=fill>0?Math.floor(usableVolume/fill):0;
-    const valid=yieldPerBatch>0&&fill>0;
-    const batches=valid?Math.ceil(qty/yieldPerBatch):0;
-    const leftover=valid?batches*yieldPerBatch-qty:0;
-    const jarUnit=number(g.jarPackQty)>0?number(g.jarPackCost)/number(g.jarPackQty):0;
-    const extrasUnit=g.extras.filter(x=>x.enabled).reduce((s,x)=>s+number(x.cost),0);
-    const materialsUnit=jarUnit+extrasUnit;
-    const laborUnit=number(g.laborPerUnit);
-    const ingredientTotal=batches*batchCost;
-    const materialsTotal=materialsUnit*qty;
-    const laborTotal=laborUnit*qty;
-    const fixedTotal=number(g.setupCost);
+    const validVolume=fill>0&&usableVolume>0,requestedVolume=qty*fill;
+    const yieldPerBatch=validVolume?Math.floor(usableVolume/fill):0;
+    const batches=validVolume?Math.ceil(requestedVolume/usableVolume):0;
+    const leftoverMl=validVolume?Math.max(0,batches*usableVolume-requestedVolume):0;
+    const packagingKnown=knownCost(o.packagingUnitCost),laborKnown=knownCost(o.laborUnit);
+    const jarUnit=packagingKnown?number(o.packagingUnitCost):0;
+    const extrasUnit=o.includeExtras?g.extras.filter(x=>x.enabled).reduce((sum,x)=>sum+number(x.cost),0):0;
+    const materialsUnit=jarUnit+extrasUnit,laborUnit=laborKnown?number(o.laborUnit):0;
+    const ingredientTotal=batches*batchCost,materialsTotal=materialsUnit*qty,laborTotal=laborUnit*qty,fixedTotal=number(g.setupCost);
     const productionCost=ingredientTotal+materialsTotal+laborTotal+fixedTotal;
-    const paymentFee=number(pr.paymentFee)/100;
-    const targetMargin=number(pr.targetMargin)/100;
-    const denominator=1-paymentFee-targetMargin;
-    const recommended=valid&&denominator>0?Math.ceil((productionCost/qty/denominator-1e-9)*2)/2:null;
-    const tierIndex=qty<20?0:qty<40?1:2;
-    const tierPrice=number(pr.tiers[tierIndex]?.price);
-    let unitPrice= o.pricingMode==='manual'?number(o.manualUnitPrice):o.pricingMode==='recommended'?(recommended??0):tierPrice;
-    const subtotal=unitPrice*qty;
-    const deliveryCharged=number(o.deliveryCharged);
-    const discount=number(o.discount);
-    const gross=Math.max(0,subtotal+deliveryCharged-discount);
-    const cardFees=gross*paymentFee;
-    const deliveryCost=number(o.deliveryCost);
-    const totalCost=productionCost+cardFees+deliveryCost;
-    const profit=gross-totalCost;
-    const margin=gross>0?(profit/gross)*100:0;
-    const packs=number(g.jarPackQty)>0?Math.ceil(qty/number(g.jarPackQty)):0;
-    const cashJars=packs*number(g.jarPackCost);
-    const jarsLeft=packs*number(g.jarPackQty)-qty;
-    return {qty,fill,valid,batchCost,usableVolume,yieldPerBatch,batches,leftover,jarUnit,extrasUnit,materialsUnit,laborUnit,ingredientTotal,materialsTotal,laborTotal,fixedTotal,productionCost,recommended,tierPrice,unitPrice,subtotal,deliveryCharged,discount,gross,cardFees,deliveryCost,totalCost,profit,margin,packs,cashJars,jarsLeft,paymentFee};
+    const paymentFee=number(pr.paymentFee)/100,targetMargin=number(pr.targetMargin)/100,denominator=1-paymentFee-targetMargin;
+    const recommended=validVolume&&packagingKnown&&laborKnown&&denominator>0?Math.ceil((productionCost/qty/denominator-1e-9)*2)/2:null;
+    const unitPrice=o.pricingMode==='manual'?number(o.manualUnitPrice):(recommended??0);
+    const subtotal=unitPrice*qty,deliveryCharged=number(o.deliveryCharged),discount=number(o.discount),gross=Math.max(0,subtotal+deliveryCharged-discount);
+    const cardFees=gross*paymentFee,deliveryCost=number(o.deliveryCost),totalCost=productionCost+cardFees+deliveryCost;
+    const profit=gross-totalCost,margin=gross>0?profit/gross*100:0;
+    const valid=validVolume&&packagingKnown&&laborKnown&&(o.pricingMode==='manual'||recommended!==null);
+    return {qty,fill,valid,validVolume,packagingKnown,laborKnown,batchCost,usableVolume,requestedVolume,yieldPerBatch,batches,leftoverMl,jarUnit,extrasUnit,materialsUnit,laborUnit,ingredientTotal,materialsTotal,laborTotal,fixedTotal,productionCost,recommended,unitPrice,subtotal,deliveryCharged,discount,gross,cardFees,deliveryCost,totalCost,profit,margin,paymentFee};
   }
   function quoteText(c,o=state.order){
-    const lines=['🍮 *PUDIM DA LUD*','*ORÇAMENTO DE LEMBRANCINHAS*',''];
+    const lines=['🍮 *PUDIM DA LUD*','*ORÇAMENTO DE PUDINS*',''];
     if(o.customer.trim())lines.push('Cliente: '+o.customer.trim());
     if(o.occasion.trim())lines.push('Ocasião: '+o.occasion.trim());
     if(o.date)lines.push('Data do evento: '+formatDate(o.date));
     if(o.customer.trim()||o.occasion.trim()||o.date)lines.push('');
-    lines.push(`*${c.qty} potinhos de pudim* (${dec(c.fill)} ml cada)`);
-    const extras=state.packaging.extras.filter(x=>x.enabled).map(x=>x.name.trim()).filter(Boolean);
+    if((o.flavor||'').trim())lines.push('Sabor: '+o.flavor.trim());
+    lines.push(`*${c.qty} pudim${c.qty===1?'':'s'}* de ${dec(c.fill)} ml cada`);
+    const extras=o.includeExtras?state.packaging.extras.filter(x=>x.enabled).map(x=>x.name.trim()).filter(Boolean):[];
     if(extras.length)lines.push('Acompanha: '+extras.join(', ')+'.');
     lines.push('','Valor unitário: '+money(c.unitPrice),'Subtotal: '+money(c.subtotal));
     if(c.deliveryCharged)lines.push('Entrega: '+money(c.deliveryCharged));
@@ -428,49 +431,42 @@
     return lines.join('\n');
   }
   function renderComputed(){
-    const c=calculate();
-    const valid=c.valid;
-    const mode=state.order.pricingMode;
-    $('#manualPriceField').hidden=mode!=='manual';
-    $('#effectivePriceField').hidden=mode==='manual';
+    const c=calculate(),valid=c.valid,mode=state.order.pricingMode;
+    $('#manualPriceField').hidden=mode!=='manual';$('#effectivePriceField').hidden=mode==='manual';
     $('#effectivePrice').textContent=money(c.unitPrice)+(mode==='recommended'?' · margem desejada':'');
-    const warning=valid?
-      `ⓘ &nbsp; Com uma receita você faz <strong>${c.yieldPerBatch} potinhos</strong> de ${dec(c.fill)} ml. Para este pedido, serão ${c.batches} receita${c.batches===1?'':'s'}.`:
-      '⚠️ &nbsp; O volume por potinho está maior que o rendimento útil da receita. Ajuste os valores para calcular.';
-    $('#yieldNotice').innerHTML=warning;
-    const recommendedText=c.recommended!==null?money(c.recommended):'Indisponível';
-    const profitability=c.profit>=0?'success':'danger';
+    document.querySelectorAll('[data-size]').forEach(b=>b.classList.toggle('active',Number(b.dataset.size)===c.fill));
+    const errors=[];
+    if(!c.validVolume)errors.push('Informe tamanho e rendimento válidos.');
+    if(!c.packagingKnown)errors.push('Informe o custo da embalagem para este tamanho.');
+    if(!c.laborKnown)errors.push('Informe o custo da mão de obra para este tamanho.');
+    if(mode==='recommended'&&c.validVolume&&c.packagingKnown&&c.laborKnown&&c.recommended===null)errors.push('Margem mais taxa devem somar menos de 100%.');
+    $('#yieldNotice').innerHTML=errors.length?'⚠️ '+errors.map(esc).join('<br>'):`ⓘ Receita: <strong>${esc(state.production.recipeName||'Receita editável')}</strong>. Para ${dec(c.requestedVolume)} ml de pudim, serão <strong>${c.batches} receita(s)</strong>. Sobra estimada: ${dec(c.leftoverMl)} ml.`;
     $('#summaryCard').innerHTML=`
       <div class="heading"><div><h2>Resumo financeiro</h2><p>Confira o lucro antes de fechar.</p></div><span class="chip">Ao vivo</span></div>
       <div class="result-note">VALOR TOTAL DO ORÇAMENTO</div>
       <div class="main-price">${valid?money(c.gross):'—'}</div>
-      <div class="subprice">${c.qty} unidades × ${money(c.unitPrice)} cada</div>
-      <div class="summary-row"><span>Ingredientes (${c.batches} receita${c.batches===1?'':'s'})</span><strong>${money(c.ingredientTotal)}</strong></div>
-      <div class="summary-row"><span>Vidros + decoração</span><strong>${money(c.materialsTotal)}</strong></div>
-      <div class="summary-row"><span>Mão de obra + energia</span><strong>${money(c.laborTotal)}</strong></div>
-      ${c.fixedTotal?`<div class="summary-row"><span>Custo fixo da encomenda</span><strong>${money(c.fixedTotal)}</strong></div>`:''}
-      ${c.deliveryCost?`<div class="summary-row"><span>Seu custo de entrega</span><strong>${money(c.deliveryCost)}</strong></div>`:''}
-      ${c.cardFees?`<div class="summary-row"><span>Taxa de venda</span><strong>${money(c.cardFees)}</strong></div>`:''}
+      <div class="subprice">${c.qty} pudins de ${dec(c.fill)} ml × ${money(c.unitPrice)} cada</div>
+      <div class="summary-row"><span>Ingredientes (${c.batches} receitas)</span><strong>${money(c.ingredientTotal)}</strong></div>
+      <div class="summary-row"><span>Embalagem + decoração</span><strong>${valid?money(c.materialsTotal):'—'}</strong></div>
+      <div class="summary-row"><span>Mão de obra + energia</span><strong>${valid?money(c.laborTotal):'—'}</strong></div>
+      ${c.fixedTotal?`<div class="summary-row"><span>Custo fixo</span><strong>${money(c.fixedTotal)}</strong></div>`:''}
+      ${c.deliveryCost?`<div class="summary-row"><span>Custo de entrega</span><strong>${money(c.deliveryCost)}</strong></div>`:''}
+      ${c.cardFees&&valid?`<div class="summary-row"><span>Taxa de venda</span><strong>${money(c.cardFees)}</strong></div>`:''}
       <div class="summary-row total"><span>Meu custo total</span><strong>${valid?money(c.totalCost):'—'}</strong></div>
-      <div class="profit-tiles"><div class="profit-tile ${profitability}"><span>SOBRA DO PEDIDO</span><strong>${valid?money(c.profit):'—'}</strong></div><div class="profit-tile"><span>MARGEM REAL</span><strong>${valid?dec(c.margin)+'%':'—'}</strong></div></div>
-      <div class="summary-tip"><b>Preço sugerido pela margem:</b> ${recommendedText} por pote.<br><b>Lucro só existe depois dos custos.</b> O valor de mão de obra informado já está contabilizado como custo.</div>
-    `;
+      <div class="profit-tiles"><div class="profit-tile ${c.profit>=0?'success':'danger'}"><span>SOBRA DO PEDIDO</span><strong>${valid?money(c.profit):'—'}</strong></div><div class="profit-tile"><span>MARGEM REAL</span><strong>${valid?dec(c.margin)+'%':'—'}</strong></div></div>
+      <div class="summary-tip"><b>Preço sugerido pela margem:</b> ${c.recommended===null?'Indisponível':money(c.recommended)} por pudim.<br>A receita e os custos iniciais são apenas exemplos editáveis.</div>`;
     $('#productionMetrics').innerHTML=`
-      <div class="metric"><div class="metric-label">Receitas necessárias</div><strong>${valid?c.batches:'—'}</strong><small>${valid?`${c.yieldPerBatch} potes por receita`:'Revise o volume'}</small></div>
-      <div class="metric"><div class="metric-label">Potinhos restantes*</div><strong>${valid?c.leftover:'—'}</strong><small>*Pudim produzido, em porções</small></div>
-      <div class="metric"><div class="metric-label">Pacotes de vidro a comprar</div><strong>${c.packs}</strong><small>${money(c.cashJars)} · ${c.jarsLeft} vidros de sobra</small></div>`;
-    $('#quotePreview').textContent=valid?quoteText(c):'Ajuste o volume e o rendimento da receita para gerar um orçamento válido.';
-    $('#saveOrderBtn').disabled=!valid;
-    $('#copyQuoteBtn').disabled=!valid;
-    $('#shareBtn').disabled=!valid;
-    $('#printBtn').disabled=!valid;
+      <div class="metric"><div class="metric-label">Receitas necessárias</div><strong>${c.validVolume?c.batches:'—'}</strong><small>${c.validVolume?dec(c.requestedVolume)+' ml encomendados':'Revise o volume'}</small></div>
+      <div class="metric"><div class="metric-label">Unidades por receita</div><strong>${c.validVolume?c.yieldPerBatch:'—'}</strong><small>Volume útil: ${dec(c.usableVolume)} ml</small></div>
+      <div class="metric"><div class="metric-label">Volume restante</div><strong>${c.validVolume?dec(c.leftoverMl)+' ml':'—'}</strong><small>Após produzir o pedido</small></div>`;
+    $('#quotePreview').textContent=valid?quoteText(c):'Preencha os custos e o rendimento para gerar o orçamento.';
+    ['saveOrderBtn','copyQuoteBtn','shareBtn','printBtn'].forEach(id=>$('#'+id).disabled=!valid);
     const display=$('#batchCostDisplay');if(display)display.textContent=money(c.batchCost);
-    const jar=$('#jarCostDisplay');if(jar)jar.textContent=money(c.jarUnit);
-    const yieldEl=$('#oneBatchYield');if(yieldEl)yieldEl.textContent=c.usableVolume?Math.floor(c.usableVolume/40):'0';
+    const yieldEl=$('#oneBatchYield');if(yieldEl)yieldEl.textContent=c.validVolume?c.yieldPerBatch:0;
   }
   function inputMarkup(path,cls='',type='text',extra=''){
     const value=fieldGet(path);
-    const htmlValue=type==='number'?(Number.isFinite(Number(value))?value:0):value;
+    const htmlValue=type==='number'?(value===null||value===undefined||value===''?'':Number.isFinite(Number(value))?value:''):value;
     return `<input ${cls?`class="${cls}"`:''} type="${type}" data-field="${esc(path)}" value="${esc(htmlValue)}" ${type==='number'?'min="0" step="0.01"':''} ${extra}>`;
   }
   function renderIngredients(){
@@ -489,6 +485,14 @@
       <button class="icon-btn" data-remove-extra="${i}" title="Excluir acessório" aria-label="Excluir acessório">×</button>
     </div>`).join('')||'<div class="hint">Nenhum acessório cadastrado.</div>';
   }
+  function renderSizes(){
+    $('#sizesList').innerHTML=state.packaging.sizes.map((x,i)=>`<div class="dynamic-row profile-row">
+      ${inputMarkup(`packaging.sizes.${i}.size`,'','number','step="1" aria-label="Tamanho em ml"')}
+      ${inputMarkup(`packaging.sizes.${i}.cost`,'','number','placeholder="A definir" aria-label="Embalagem por unidade"')}
+      ${inputMarkup(`packaging.sizes.${i}.labor`,'','number','placeholder="A definir" aria-label="Mão de obra por unidade"')}
+      <button class="icon-btn" data-remove-size="${i}" aria-label="Excluir tamanho">×</button>
+    </div>`).join('')||'<div class="hint">Nenhum tamanho cadastrado.</div>';
+  }
   function fillInputs(){
     document.querySelectorAll('[data-field]').forEach(el=>{
       const value=fieldGet(el.dataset.field);
@@ -500,7 +504,7 @@
     document.querySelectorAll('.panel-view').forEach(el=>el.classList.toggle('active',el.id===`view-${view}`));
     document.querySelectorAll('.nav-btn').forEach(el=>el.classList.toggle('active',el.dataset.goto===view));
     $('#topbarTitle').textContent={budget:'VISÃO GERAL / ORÇAMENTO',costs:'CONFIGURAÇÕES / CUSTOS',history:'REGISTROS / HISTÓRICO'}[view]||'PUDIM DA LUD';
-    if(view==='costs'){renderIngredients();renderExtras();fillInputs();renderComputed();}
+    if(view==='costs'){renderIngredients();renderExtras();renderSizes();fillInputs();renderComputed();}
     if(view==='history')renderHistory();
     window.scrollTo({top:0,behavior:'instant'});
   }
@@ -510,22 +514,22 @@
     $('#historyCount').textContent=`${rows.length} registro${rows.length!==1?'s':''}`;
     if(!rows.length){$('#historyList').innerHTML=`<div class="empty-state"><span class="big">🍮</span><h3>${needle?'Nada encontrado':'Suas encomendas começam aqui'}</h3><p>${needle?'Tente buscar por outro nome ou ocasião.':'Monte seu primeiro orçamento e clique em “Salvar orçamento” para aparecer aqui.'}</p><button class="btn btn-primary" data-goto="budget">Criar orçamento</button></div>`;return;}
     $('#historyList').innerHTML=rows.map(item=>`<div class="history-card">
-      <div><div class="history-meta">Salvo em ${esc(new Date(item.savedAt).toLocaleDateString('pt-BR'))}${item.order.date?' · Evento em '+esc(formatDate(item.order.date)):''}</div><h3>${esc(item.order.customer||'Cliente não informado')}</h3><p>${esc(item.order.occasion||'Lembrancinhas')} · ${item.result.qty} potinhos de ${dec(item.result.fill)} ml · ${money(item.result.unitPrice)}/un.</p></div>
+      <div><div class="history-meta">Salvo em ${esc(new Date(item.savedAt).toLocaleDateString('pt-BR'))}${item.order.date?' · Evento em '+esc(formatDate(item.order.date)):''}</div><h3>${esc(item.order.customer||'Cliente não informado')}</h3><p>${esc(item.order.occasion||'Lembrancinhas')} · ${item.result.qty} pudins de ${dec(item.result.fill)} ml · ${money(item.result.unitPrice)}/un.</p></div>
       <div class="history-right"><div class="history-amount">${money(item.result.gross)}</div><div class="history-profit">Sobra calculada: ${money(item.result.profit)}</div><div class="history-buttons"><button class="btn btn-sm btn-soft" data-history="reload" data-id="${esc(item.id)}">Recalcular</button><button class="btn btn-sm btn-secondary" data-history="print" data-id="${esc(item.id)}">Imprimir</button><button class="btn btn-sm btn-danger" data-history="delete" data-id="${esc(item.id)}">Excluir</button></div></div>
     </div>`).join('');
   }
   function saveOrder(){
     const result=calculate();
-    if(!result.valid){toast('Confira o rendimento e o volume do potinho.');return;}
+    if(!result.valid){toast('Confira o rendimento e os custos da embalagem e mão de obra.');return;}
     state.history.unshift({id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,savedAt:new Date().toISOString(),order:clone(state.order),result:clone(result),quote:quoteText(result)});
     persist();toast('Orçamento salvo no histórico deste dispositivo.');
   }
   function printQuote(c,o){
     $('#printArea').innerHTML=`
       <div class="print-top"><div><div class="print-brand">Pudim da Lud</div><div class="print-sub">FEITO COM CARINHO, EM CADA DETALHE</div></div><div style="text-align:right;color:#92725b;font-size:12px">ORÇAMENTO<br>${new Date().toLocaleDateString('pt-BR')}</div></div>
-      <div class="print-title">Orçamento de lembrancinhas</div>
+      <div class="print-title">Orçamento de pudins</div>
       <div class="print-details"><div><strong>CLIENTE</strong><br>${esc(o.customer||'Não informado')}</div><div><strong>OCASIÃO</strong><br>${esc(o.occasion||'Lembrancinhas')}</div><div><strong>DATA DO EVENTO</strong><br>${esc(formatDate(o.date)||'A combinar')}</div><div><strong>QUANTIDADE</strong><br>${c.qty} unidades</div></div>
-      <table class="print-table"><thead><tr><th>Descrição</th><th>Quantidade</th><th>Unitário</th><th>Total</th></tr></thead><tbody><tr><td>Pudim artesanal no vidro (${dec(c.fill)} ml)</td><td>${c.qty}</td><td>${money(c.unitPrice)}</td><td>${money(c.subtotal)}</td></tr>${c.deliveryCharged?`<tr><td>Entrega</td><td>1</td><td>${money(c.deliveryCharged)}</td><td>${money(c.deliveryCharged)}</td></tr>`:''}${c.discount?`<tr><td>Desconto</td><td>1</td><td>-${money(c.discount)}</td><td>-${money(c.discount)}</td></tr>`:''}</tbody></table>
+      <table class="print-table"><thead><tr><th>Descrição</th><th>Quantidade</th><th>Unitário</th><th>Total</th></tr></thead><tbody><tr><td>Pudim ${esc(o.flavor||'artesanal')} (${dec(c.fill)} ml)</td><td>${c.qty}</td><td>${money(c.unitPrice)}</td><td>${money(c.subtotal)}</td></tr>${c.deliveryCharged?`<tr><td>Entrega</td><td>1</td><td>${money(c.deliveryCharged)}</td><td>${money(c.deliveryCharged)}</td></tr>`:''}${c.discount?`<tr><td>Desconto</td><td>1</td><td>-${money(c.discount)}</td><td>-${money(c.discount)}</td></tr>`:''}</tbody></table>
       <div class="print-total"><span>Total</span><span>${money(c.gross)}</span></div>
       ${o.notes.trim()?`<div class="print-note"><strong>Observações:</strong> ${esc(o.notes)}</div>`:''}
       <div class="print-footer">Instagram: @pudim_dalud &nbsp; · &nbsp; WhatsApp: (62) 98651-6120<br>Obrigada por escolher o Pudim da Lud! 💛</div>`;
@@ -548,25 +552,26 @@
       const imported=parsed.data||parsed;
       if(!imported||!Array.isArray(imported.ingredients)||!imported.order||!imported.packaging||!imported.pricing)throw Error('Formato inválido');
       if(!confirm('Importar este backup substituirá seus custos e histórico atuais. Continuar?'))return;
-      state=merge(clone(defaults),imported);persist();renderIngredients();renderExtras();fillInputs();renderComputed();go('budget');toast('Backup restaurado!');
+      state=merge(clone(defaults),imported);migrate(imported);persist();renderIngredients();renderExtras();renderSizes();fillInputs();renderComputed();go('budget');toast('Backup restaurado!');
     }catch(e){toast('Arquivo inválido. Use o JSON exportado pelo sistema.');}
     finally{$('#importFile').value='';}
   }
-  document.addEventListener('input',e=>{
-    const field=e.target.closest('[data-field]');
-    if(!field||field.type==='checkbox')return;
-    fieldSet(field.dataset.field,field.type==='number'?Number(field.value)||0:field.value);
-    persist();renderComputed();
-  });
-  document.addEventListener('change',e=>{
-    const field=e.target.closest('[data-field]');
-    if(!field)return;
+  function changeField(e){
+    const field=e.target.closest('[data-field]');if(!field)return;
     if(field.type==='checkbox')fieldSet(field.dataset.field,field.checked);
-    else fieldSet(field.dataset.field,field.type==='number'?Number(field.value)||0:field.value);
+    else if(field.type==='number'){
+      const optional=field.dataset.field==='order.packagingUnitCost'||field.dataset.field==='order.laborUnit'||/^packaging\.sizes\.\d+\.(cost|labor)$/.test(field.dataset.field);
+      fieldSet(field.dataset.field,optional&&field.value.trim()===''?null:Number(field.value)||0);
+    }else fieldSet(field.dataset.field,field.value);
+    if(field.dataset.field==='order.fillMl'){setSizeCosts();fillInputs();}
     persist();renderComputed();
-  });
+  }
+  document.addEventListener('input',e=>{if(e.target.type!=='checkbox')changeField(e);});
+  document.addEventListener('change',changeField);
   document.addEventListener('click',e=>{
     const goto=e.target.closest('[data-goto]');if(goto){go(goto.dataset.goto);return;}
+    const size=e.target.closest('[data-size]');if(size){state.order.fillMl=Number(size.dataset.size);setSizeCosts();persist();fillInputs();renderComputed();return;}
+    const removeSize=e.target.closest('[data-remove-size]');if(removeSize){state.packaging.sizes.splice(Number(removeSize.dataset.removeSize),1);persist();renderSizes();renderComputed();return;}
     const delIng=e.target.closest('[data-remove-ingredient]');if(delIng){state.ingredients.splice(Number(delIng.dataset.removeIngredient),1);persist();renderIngredients();renderComputed();return;}
     const delExt=e.target.closest('[data-remove-extra]');if(delExt){state.packaging.extras.splice(Number(delExt.dataset.removeExtra),1);persist();renderExtras();renderComputed();return;}
     const hist=e.target.closest('[data-history]');if(hist){
@@ -579,6 +584,10 @@
   });
   $('#addIngredient').addEventListener('click',()=>{state.ingredients.push({name:'Novo ingrediente',amount:'1 unidade',cost:0});persist();renderIngredients();renderComputed();});
   $('#addExtra').addEventListener('click',()=>{state.packaging.extras.push({name:'Novo acessório',cost:0,enabled:true});persist();renderExtras();renderComputed();});
+  $('#addSize').addEventListener('click',()=>{state.packaging.sizes.push({size:0,cost:null,labor:null});persist();renderSizes();});
+  $('#applySizeProfile').addEventListener('click',()=>{setSizeCosts();persist();fillInputs();renderComputed();toast('Custos cadastrados aplicados.');});
+  $('#resetExample').addEventListener('click',()=>{if(!confirm('Restaurar a receita de exemplo e substituir a atual?'))return;state.ingredients=clone(defaults.ingredients);state.production=clone(defaults.production);persist();renderIngredients();fillInputs();renderComputed();});
+  $('#clearRecipe').addEventListener('click',()=>{if(!confirm('Limpar a receita atual?'))return;state.ingredients=[];state.production.recipeName='Minha receita';state.production.yieldMl=0;persist();renderIngredients();fillInputs();renderComputed();});
   $('#saveOrderBtn').addEventListener('click',saveOrder);
   $('#copyQuoteBtn').addEventListener('click',()=>copyQuote(quoteText(calculate())));
   $('#shareBtn').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent(quoteText(calculate())),'_blank','noopener'));
@@ -590,7 +599,7 @@
   // Foto fornecida pela cliente, integrada diretamente ao arquivo para funcionar offline.
   const imageData='data:image/jpeg;base64,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';
   if(imageData.startsWith('data:image/'))$('#heroPhoto').src=imageData;
-  fillInputs();renderIngredients();renderExtras();renderComputed();persist();
+  fillInputs();renderIngredients();renderExtras();renderSizes();renderComputed();persist();
 })();
 </script>
 </body>
